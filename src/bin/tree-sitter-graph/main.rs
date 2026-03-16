@@ -93,7 +93,8 @@ fn main() -> Result<()> {
     let mut loader = Loader::new()?;
     let loader_config = config.get()?;
     loader.find_all_languages(&loader_config)?;
-    let language = loader.select_language(source_path, &current_dir, matches.value_of("scope"))?;
+    let language =
+        loader.select_language(Some(source_path), &current_dir, matches.value_of("scope"), None)?;
 
     let tsg = std::fs::read(tsg_path)
         .with_context(|| format!("Cannot read TSG file {}", tsg_path.display()))?;
